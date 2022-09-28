@@ -1,7 +1,5 @@
 package com.hostelMS.daoImpl;
-
 import org.hibernate.Session;
-
 import com.hostelMS.config.HibernateUtil;
 import com.hostelMS.dao.hostelMSDao;
 import com.hostelMS.exception.GlobalException;
@@ -26,12 +24,10 @@ public class hostelMSdaoImpl implements hostelMSDao {
 				return 1;	
 			}
 			else {
-				throw new GlobalException("user already existed");
+				throw new GlobalException("USER ALREADY EXISTS TRY AGAIN !!!! ");
 			}
-			
 		}
-			
-	}
+		}
 
 	@Override
 	public user login(String username, String password) throws GlobalException {
@@ -47,11 +43,11 @@ public class hostelMSdaoImpl implements hostelMSDao {
 				return u2;
 			}
 			else {
-				throw new GlobalException("Wrong Username or Password");
+				throw new GlobalException("WRONG USENAME OR PASSWORD TRY AGAIN !!!! ");
 			}
 			}
 			else {
-				throw new GlobalException("Wrong Username or Password");
+				throw new GlobalException("WRONG USENAME OR PASSWORD TRY AGAIN !!!! ");
 			}
 			
 		}

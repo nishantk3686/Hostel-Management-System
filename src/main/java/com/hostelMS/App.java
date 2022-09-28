@@ -1,9 +1,6 @@
 package com.hostelMS;
-
 import java.util.Scanner;
-
 import org.apache.log4j.Logger;
-
 import com.hostelMS.exception.GlobalException;
 import com.hostelMS.service.loginregister;
 import com.hostelMS.serviceImpl.loginregisterimpl;
@@ -14,9 +11,9 @@ public class App
     public static void main( String[] args )throws GlobalException
     {
     	Scanner bs=new Scanner(System.in);
-    	log.info("\t\t\t\t\t---------Hostel Management System----------");
+    	log.info("\t\t\t\t\t ******** WELCOME TO HOSTEL MANAGEMENT SYSTEM ********");
     	loginregister loginreg=new loginregisterimpl();
-    	log.info("\nPress 1 for Registeration\nPress 2 for Login");
+    	log.info("\nPRESS-1 TO REGISTER YOURSELF \nPRESS-2 FOR LOGIN INTO SYSTEM");
     	int op=bs.nextInt();
     	
     	switch(op) {
