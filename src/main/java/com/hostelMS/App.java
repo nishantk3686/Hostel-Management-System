@@ -11,7 +11,7 @@ public class App
     public static void main( String[] args )throws GlobalException
     {
     	Scanner bs=new Scanner(System.in);
-    	log.info("\t\t\t\t\t ******** WELCOME TO HOSTEL MANAGEMENT SYSTEM ********");
+    	log.info("\t\t\t\t\t ******** WELCOME TO SANSKRITI HOSTEL ********");
     	loginregister loginreg=new loginregisterimpl();
     	log.info("\nPRESS-1 TO REGISTER YOURSELF \nPRESS-2 FOR LOGIN INTO SYSTEM");
     	int op=bs.nextInt();

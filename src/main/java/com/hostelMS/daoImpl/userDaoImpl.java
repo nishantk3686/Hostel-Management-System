@@ -1,7 +1,6 @@
 package com.hostelMS.daoImpl;
 
 import org.hibernate.Session;
-
 import com.hostelMS.config.HibernateUtil;
 import com.hostelMS.dao.userDao;
 import com.hostelMS.exception.GlobalException;
@@ -42,7 +41,7 @@ public class userDaoImpl implements userDao{
 			return u2;
 	}
 	}
-	//Here i updating phone number
+	//updating phone number
 	@Override
 	public int changePhone(int uId, String phone) {
 		
@@ -54,7 +53,7 @@ public class userDaoImpl implements userDao{
 		}
 	}
 
-	//Checking current password to update to new password
+	//updating password if current password is correct
 	@Override
 	public int changePassword(int uId, String oldPwd, String newPwd) throws GlobalException {
 		
@@ -67,10 +66,9 @@ public class userDaoImpl implements userDao{
 				return status;
 			}
 			else {
-				throw new GlobalException("Please provide your current password To upadate to new password");
-			}			
+				throw new GlobalException("To update password you have to enter current password");
+			}
 		}
-				
-	}
+		}
 
 }

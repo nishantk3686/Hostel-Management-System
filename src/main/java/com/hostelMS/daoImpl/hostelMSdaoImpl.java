@@ -49,11 +49,6 @@ public class hostelMSdaoImpl implements hostelMSDao {
 			else {
 				throw new GlobalException("WRONG USENAME OR PASSWORD TRY AGAIN !!!! ");
 			}
-			
-		}
-			
-		
-		
+			}
 	}
-
 }

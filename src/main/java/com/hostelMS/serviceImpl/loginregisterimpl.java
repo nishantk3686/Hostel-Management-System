@@ -1,8 +1,10 @@
 package com.hostelMS.serviceImpl;
-
 import java.util.Scanner;
-import java.util.regex.Pattern;
-
+import java.util.Set;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import org.apache.log4j.Logger;
 import com.hostelMS.App;
 import com.hostelMS.dao.hostelMSDao;
@@ -20,14 +22,14 @@ public class loginregisterimpl implements loginregister {
 	
 	//registration method
 	public void register() throws GlobalException{
-		log.info("welcome to registeration");
-		log.info("Enter Username");
+		log.info("WELCOME TO SANSKRITI HOSTEL");
+		log.info("ENTER USERNAME");
 		String uname=bs.next();
-		log.info("Create Password");
+		log.info("CREATE PASSWORD");
 		String upwd=bs.next();
-		log.info("Enter Phone number");
+		log.info("ENTER PHONE NUMBER");
 		String uphone=bs.next();
-		log.info("Enter Address");
+		log.info("ENTER ADDRESS");
 		String uaddress=bs.next();
 		
 		user u1=new user();
@@ -38,35 +40,41 @@ public class loginregisterimpl implements loginregister {
 		u1.setUserRole("student");
 		u1.setUserRoom(null);
 		u1.setUserFee(0);
-		//regular expressions to check data correctness
-		if(Pattern.matches("[a-zA-Z]{4,}", uname)&&Pattern.matches("[a-zA-Z0-9@#]{6,}",upwd)&&Pattern.matches("[0-9]{10}", uphone))
+		
+		ValidatorFactory vf= Validation.buildDefaultValidatorFactory();
+		Validator valid=vf.getValidator();
+		
+		Set<ConstraintViolation<user>> violations=	valid.validate(u1);
+		
+		if(violations.size()>0)
 		{
-			//saving the user details
-			int status=dao.registration(u1);
-			//log.info(status);
-			if(status==1) {
-				log.info("Registration success");
-			}
-			else {
-				throw new GlobalException("Something went wrong");
-			}
+			for(ConstraintViolation<user> violate:violations)
+				log.info(violate.getMessage());
 		}
 		else {
-			throw new GlobalException("Invalid data");
+		int status=dao.registration(u1);
+			
+			if(status==1) {
+				log.info("YOU ARE SUCCESFULLY REGISTERED WITH OUR HOSTEL");
+			}
+			else {
+				throw new GlobalException("SOMETHING WENT WRONG. TRY AGAIN !!!!");
+			}
 		}
-}
+	}
+	
 
 	public void login()throws GlobalException {
-		log.info("welcome to Login");
+		log.info("WELCOME TO SANSKRITI HOSTEL \n PROVIDE SOME DETAILS TO LOGIN....");
 		
-		log.info("Enter username");
+		log.info("ENTER USERNAME");
 		String username=bs.next();
-		log.info("Enter password");
+		log.info("ENTER PASSWORD");
 		String password=bs.next();
 		//checking login
 		user u1=dao.login(username, password);
 		//success message
-		log.info("Hello"+ u1.getUserName() +"Login Success");
+		log.info("Hello"+u1.getUserName()+"Login Success");
 		userdashboard udl=new userdashboardImpl();
 		admindashboard adl=new admindashboardImpl();
 		//if userrole is student userdashboard will open
@@ -78,4 +86,5 @@ public class loginregisterimpl implements loginregister {
 			adl.dashboard();
 		}
 	}
+
 }
